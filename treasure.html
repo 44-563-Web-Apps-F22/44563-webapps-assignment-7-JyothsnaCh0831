@@ -52,6 +52,10 @@
             .help {
                 background-color: lightgreen;
             }
+            button {
+                margin: 15px;
+                width: 200px;
+            }
         </style>
 
     </head>
@@ -74,6 +78,9 @@
                 <div id="help" class="col-sm menu-item help">
                     Help report
                 </div>
+            </div>
+            <div class="container text-center">
+                <button class="btn btn-success" type="submit" onclick="resetGame()">Reset</button>
             </div>
             <br>
             <!-- Part 3 -->
@@ -187,7 +194,7 @@
             var chestCount = 0
             var score = 0
             var lastCheck = 12
-            var treasureLocation = 18
+            var treasureLocation = Math.floor(Math.random() * 24)
 
             function check(position) {
                 image = document.getElementById(ids[position])
@@ -228,6 +235,23 @@
                     }
                 } else {
                     document.getElementById("help").innerHTML = "Sorry, no help available"
+                }
+            }
+
+            // Bonus
+            function resetGame() {
+                treasureLocation = Math.floor(Math.random() * 24)
+                while(treasureLocation == 12) {
+                    treasureLocation = Math.floor(Math.random() * 24)
+                }
+                chestCount = 0
+                score = 0
+                document.getElementById("chests").innerHTML = "Number of chests checked is zero"
+                document.getElementById("score").innerHTML = "Score is unknown"
+                for(let i = 0; i < 24; i++) {
+                    if(i != 12) {
+                        document.getElementById(ids[i]).src = "treasure_chest.png"
+                    }
                 }
             }
         </script>
